@@ -1,0 +1,18 @@
+name: CI
+on:
+  workflow_dispatch:
+  repository_dispatch:
+    types: perform_release
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: fwilhe2/bump-version@wip2
+      id: bump
+    - run: echo ${{ steps.bump.outputs.newVersion }}
+    - uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ steps.bump.outputs.newVersion }}
