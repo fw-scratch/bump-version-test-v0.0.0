@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - uses: fwilhe2/bump-version@wip2
+    - uses: fwilhe2/bump-version@main
       id: bump
     - run: echo ${{ steps.bump.outputs.newVersion }}
     - uses: actions/create-release@v1
